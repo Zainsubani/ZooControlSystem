@@ -1,4 +1,4 @@
-package entity;
+package hibernate.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,11 +12,8 @@ public class Cage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Set<Animal> animalsInCage = new HashSet<Animal>();
-
-    public void setAnimalsInCage(Set<Animal> animalsInCage) {
-        this.animalsInCage = animalsInCage;
-    }
+    @OneToMany(mappedBy = "cage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Animal> animalsInCage = new HashSet<Animal>();
 
     public Long getId() {
         return id;
@@ -26,7 +23,6 @@ public class Cage {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "cage", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Animal> getAnimalsInCage() {
         return this.animalsInCage;
     }

@@ -1,4 +1,4 @@
-package entity;
+package hibernate.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,9 +18,9 @@ public class Zookeeper {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @OneToMany(mappedBy = "zookeeper", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Animal> animalSet = new HashSet<Animal>();
 
-    @OneToMany(mappedBy = "zookeeper", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Animal> getAnimalSet() {
         return animalSet;
     }
@@ -50,6 +50,16 @@ public class Zookeeper {
     }
 
     public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString(){
+        return firstName + " " + lastName;
+    }
+
+    public Zookeeper(String  firstName, String lastName){
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 }

@@ -1,6 +1,8 @@
-package entity;
+package hibernate.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "SPECIES")
@@ -12,6 +14,9 @@ public class Species {
 
     @Column(name = "SPECIES_NAME")
     private String name;
+
+    @OneToMany(mappedBy = "species", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Animal> animals = new HashSet<Animal>();
 
     public Long getId() {
         return id;
@@ -26,6 +31,19 @@ public class Species {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Animal> getAllAnimals() {
+        return this.animals;
+    }
+
+    @Override
+    public String toString(){
+        return name;
+    }
+
+    public Species(String name){
         this.name = name;
     }
 }
