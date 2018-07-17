@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ANIMAL")
+@Table(name = "ZOOKEEPER")
 public class Zookeeper {
 
     @Id
