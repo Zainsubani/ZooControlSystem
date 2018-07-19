@@ -1,6 +1,5 @@
 package hibernate.dao;
 
-import hibernate.entity.Animal;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

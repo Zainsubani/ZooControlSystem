@@ -1,5 +1,6 @@
 package xml;
 
+import hibernate.dao.DBResourceManager;
 import hibernate.dao.GenericDAOImpl;
 import hibernate.entity.*;
 import org.w3c.dom.*;
@@ -13,10 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReaderXML {
-    private GenericDAOImpl<Animal> animalDAO = new GenericDAOImpl();
-    private GenericDAOImpl<Cage> cageDAO = new GenericDAOImpl();
-    private GenericDAOImpl<Species> speciesDAO = new GenericDAOImpl();
-    private GenericDAOImpl<Zookeeper> zookeeperDAO = new GenericDAOImpl();
+    private GenericDAOImpl<Animal> animalDAO;
+    private GenericDAOImpl<Cage> cageDAO;
+    private GenericDAOImpl<Species> speciesDAO;
+    private GenericDAOImpl<Zookeeper> zookeeperDAO;
     private Map<Integer, Serializable> zookeepersMap = new HashMap<Integer, Serializable>();
     private Map<Integer, Serializable> cagesMap = new HashMap<Integer, Serializable>();
     private Map<Integer, Serializable> speciesMap = new HashMap<Integer, Serializable>();
@@ -31,6 +32,7 @@ public class ReaderXML {
             NodeList cagesList = ((Element) ((Element) root).getElementsByTagName("cages").item(0)).getElementsByTagName("entity");
             NodeList animalsList = ((Element) ((Element) root).getElementsByTagName("animals").item(0)).getElementsByTagName("entity");
             NodeList zookeepersList = ((Element) ((Element) root).getElementsByTagName("zookeepers").item(0)).getElementsByTagName("entity");
+
             for (int i = 0; i < speciesList.getLength(); i++){
                 parseSpeciesNode(((Element) speciesList.item(i)));
             }
@@ -76,17 +78,17 @@ public class ReaderXML {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         String name = animal.getElementsByTagName("name").item(0).getTextContent();
 
-        Node species = animal.getElementsByTagName("species").item(0);
+        Node species = animal.getElementsByTagName("speciesId").item(0);
         int speciesId = new Integer(species.getTextContent());
         boolean isSpeciesIdLocal = (species.getAttributes().getNamedItem("idType").getNodeValue().equals("local") ? true : false);
         Species speciesObject = getSpeciesById(speciesId, isSpeciesIdLocal);
 
-        Node cage = animal.getElementsByTagName("cage").item(0);
+        Node cage = animal.getElementsByTagName("cageId").item(0);
         int cageId = new Integer(cage.getTextContent());
         boolean isCageIdLocal = (cage.getAttributes().getNamedItem("idType").getNodeValue().equals("local") ? true : false);
         Cage cageObject = getCageById(cageId, isCageIdLocal);
 
-        Node zookeeper = animal.getElementsByTagName("zookeeper").item(0);
+        Node zookeeper = animal.getElementsByTagName("zookeeperId").item(0);
         int zookeeperId = new Integer(zookeeper.getTextContent());
         boolean isZookeeperIdLocal = (zookeeper.getAttributes().getNamedItem("idType").getNodeValue().equals("local") ? true : false);
         Zookeeper zookeeperObject = getZookeeperById(zookeeperId, isZookeeperIdLocal);
@@ -122,5 +124,12 @@ public class ReaderXML {
             id = zookeepersMap.get(zookeeperId);
         }
         return zookeeperDAO.get(Zookeeper.class, id);
+    }
+
+    public ReaderXML(DBResourceManager resourceManager){
+        speciesDAO = resourceManager.getSpeciesDAO();
+        animalDAO = resourceManager.getAnimalDAO();
+        cageDAO = resourceManager.getCageDAO();
+        zookeeperDAO = resourceManager.getZookeeperDAO();
     }
 }

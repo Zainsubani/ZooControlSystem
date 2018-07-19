@@ -1,11 +1,13 @@
 package hibernate.dao;
 
-import hibernate.entity.Animal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +68,18 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         return entity;
     }
 
+    /*
+    public List<T> getAll(Class<T> cl){
+
+        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(cl);
+        criteria.from(cl);
+        return getCurrentSession().createQuery(criteria).getResultList();
+
+        //return getCurrentSession().createCriteria(cl).list();
+    }
+    */
+
     public Serializable save(T object) {
         return getCurrentSession().save(object);
     }
@@ -79,7 +93,25 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     public List<T> query(String hsql, Map<String, Object> params) {
-        return null;
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery(hsql);
+        if (params != null) {
+            for (String i : params.keySet()) {
+                query.setParameter(i, params.get(i));
+            }
+        }
+
+        List<T> result = null;
+        if ((hsql.toUpperCase().indexOf("DELETE") == -1)
+                && (hsql.toUpperCase().indexOf("UPDATE") == -1)
+                && (hsql.toUpperCase().indexOf("INSERT") == -1)) {
+            result = query.list();
+        } else {
+        }
+        session.getTransaction().commit();
+
+        return result;
     }
 
     public GenericDAOImpl(){
