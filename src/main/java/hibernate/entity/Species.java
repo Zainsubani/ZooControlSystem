@@ -40,7 +40,7 @@ public class Species {
 
     @Override
     public String toString(){
-        return name;
+        return String.format("{ \"name\" : \"%s\", \"speciesId\" : \"%d\" }", name, id);
     }
 
     public Species(String name){

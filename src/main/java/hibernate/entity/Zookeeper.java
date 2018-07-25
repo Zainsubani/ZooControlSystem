@@ -55,7 +55,8 @@ public class Zookeeper {
 
     @Override
     public String toString(){
-        return firstName + " " + lastName;
+        return String.format("{ \"firstName\" : \"%s\", \"lastName\" : \"%s\", \"zookeeperId\" : \"%d\"}", firstName,
+                lastName, id);
     }
 
     public Zookeeper(String  firstName, String lastName){

@@ -114,10 +114,10 @@ public class WriterXML {
 
     }
 
-    public WriterXML(DBResourceManager resourceManager){
-        speciesDAO = resourceManager.getSpeciesDAO();
-        animalDAO = resourceManager.getAnimalDAO();
-        cageDAO = resourceManager.getCageDAO();
-        zookeeperDAO = resourceManager.getZookeeperDAO();
+    public WriterXML(){
+        speciesDAO = DBResourceManager.getSpeciesDAO();
+        animalDAO = DBResourceManager.getAnimalDAO();
+        cageDAO = DBResourceManager.getCageDAO();
+        zookeeperDAO = DBResourceManager.getZookeeperDAO();
     }
 }

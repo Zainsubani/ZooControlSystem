@@ -26,4 +26,8 @@ public class Cage {
     public Set<Animal> getAnimalsInCage() {
         return this.animalsInCage;
     }
+
+    public String toString(){
+        return String.format("{ \"cageId\" : \"%d\" }", id);
+    }
 }

@@ -78,9 +78,7 @@ public class Animal {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
-        return String.format("Species: %s, name: \"%s\"\nWas born: " + sdf.format(dateOfBirth) + "\nCarried by: %s\n" +
-                "", species,
-                name,
-                zookeeper);
+        return String.format("{ \"name\" : \"%s\", \"dateOfBirth\": \"" + sdf.format(dateOfBirth) + "\", \"species\" : %s," +
+                "\"zookeeper\": %s, \"cage\" : %s }", name, species, zookeeper, cage);
     }
 }

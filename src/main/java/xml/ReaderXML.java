@@ -126,10 +126,10 @@ public class ReaderXML {
         return zookeeperDAO.get(Zookeeper.class, id);
     }
 
-    public ReaderXML(DBResourceManager resourceManager){
-        speciesDAO = resourceManager.getSpeciesDAO();
-        animalDAO = resourceManager.getAnimalDAO();
-        cageDAO = resourceManager.getCageDAO();
-        zookeeperDAO = resourceManager.getZookeeperDAO();
+    public ReaderXML(){
+        speciesDAO = DBResourceManager.getSpeciesDAO();
+        animalDAO = DBResourceManager.getAnimalDAO();
+        cageDAO = DBResourceManager.getCageDAO();
+        zookeeperDAO = DBResourceManager.getZookeeperDAO();
     }
 }

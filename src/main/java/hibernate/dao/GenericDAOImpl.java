@@ -68,18 +68,6 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         return entity;
     }
 
-    /*
-    public List<T> getAll(Class<T> cl){
-
-        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<T> criteria = builder.createQuery(cl);
-        criteria.from(cl);
-        return getCurrentSession().createQuery(criteria).getResultList();
-
-        //return getCurrentSession().createCriteria(cl).list();
-    }
-    */
-
     public Serializable save(T object) {
         return getCurrentSession().save(object);
     }
