@@ -7,8 +7,7 @@ import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.Serializable;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,11 +21,12 @@ public class ReaderXML {
     private Map<Integer, Serializable> cagesMap = new HashMap<Integer, Serializable>();
     private Map<Integer, Serializable> speciesMap = new HashMap<Integer, Serializable>();
 
-    public void parseXML(File file){
+    public void parseXML(InputStream is){
+
         DocumentBuilder documentBuilder = null;
         try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = documentBuilder.parse(file);
+            Document document = documentBuilder.parse(is);
             Node root = document.getDocumentElement();
             NodeList speciesList = ((Element) ((Element) root).getElementsByTagName("species").item(0)).getElementsByTagName("entity");
             NodeList cagesList = ((Element) ((Element) root).getElementsByTagName("cages").item(0)).getElementsByTagName("entity");
