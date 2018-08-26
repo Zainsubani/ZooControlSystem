@@ -1,6 +1,5 @@
 package server;
 
-import hibernate.entity.Animal;
 import xml.ReaderXML;
 
 import javax.servlet.ServletException;

@@ -7,7 +7,7 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class WriterXML {
     private GenericDAOImpl<Species> speciesDAO;
     private GenericDAOImpl<Zookeeper> zookeeperDAO;
 
-    public void writeXML(File file){
+    public void writeXML(OutputStream os){
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = null;
         try {
@@ -101,9 +101,7 @@ public class WriterXML {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(file);
-
-        //StreamResult result = new StreamResult(System.out);
+        StreamResult result = new StreamResult(os);
 
         try {
             Transformer  transformer = transformerFactory.newTransformer();

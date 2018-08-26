@@ -10,7 +10,7 @@
     <display-name>Zoo Control System</display-name>
     <listener>
         <listener-class>
-            database.MyServletContextListener
+            server.MyServletContextListener
         </listener-class>
     </listener>
     <welcome-file-list>

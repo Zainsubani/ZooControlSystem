@@ -1,14 +1,14 @@
-package database;
+package server;
 
-import xml.ReaderXML;
+
+import hibernate.dao.DBResourceManager;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.io.File;
 
 public class MyServletContextListener implements ServletContextListener{
 
     public void contextInitialized(ServletContextEvent arg0) {
-        //TODO
+        DBResourceManager.getAnimalDAO();
     }
 }

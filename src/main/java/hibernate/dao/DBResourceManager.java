@@ -26,14 +26,4 @@ public class DBResourceManager {
     public static GenericDAOImpl<Zookeeper> getZookeeperDAO() {
         return zookeeperDAO;
     }
-
-
-    /*
-    public DBResourceManager(){
-        animalDAO = new GenericDAOImpl();
-        cageDAO = new GenericDAOImpl();
-        speciesDAO = new GenericDAOImpl();
-        zookeeperDAO = new GenericDAOImpl();
-    }
-    */
 }
