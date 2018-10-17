@@ -35,6 +35,7 @@
         <mapping class="hibernate.entity.Cage"></mapping>
         <mapping class="hibernate.entity.Species"></mapping>
         <mapping class="hibernate.entity.Zookeeper"></mapping>
+        <mapping class="hibernate.entity.ZooControlSystemUser"/>
 
     </session-factory>
 

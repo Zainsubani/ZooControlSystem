@@ -1,5 +1,7 @@
 package hibernate.entity;
 
+import security.Passwords;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,5 +49,11 @@ public class ZooControlSystemUser {
         this.hash = hash;
         this.login = login;
         this.salt = salt;
+    }
+
+    public ZooControlSystemUser(String login, String password){
+        this.login = login;
+        this.salt = Passwords.getNextSalt();
+        this.hash = Passwords.hash(password.toCharArray(), this.salt);
     }
 }
