@@ -22,8 +22,7 @@ import java.util.Set;
         urlPatterns = "/getanimalsincage"
 )
 public class GetAnimalsInCageServlet extends HttpServlet {
-
-    private GenericDAOImpl<Cage> cageDAO;
+    private GenericDAOImpl<Cage> cageDAO = DBResourceManager.getCageDAO();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -38,11 +37,5 @@ public class GetAnimalsInCageServlet extends HttpServlet {
             isCommaNeeded = true;
         }
         writer.write("] }");
-
-    }
-
-    public void init(ServletConfig config) throws ServletException {
-        super.init();
-        cageDAO = DBResourceManager.getCageDAO();
     }
 }

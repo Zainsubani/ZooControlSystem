@@ -12,7 +12,7 @@ public class Species {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "SPECIES_NAME")
+    @Column(name = "SPECIES_NAME", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "species", cascade = CascadeType.ALL, orphanRemoval = true)

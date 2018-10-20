@@ -12,7 +12,7 @@ public class Animal {
     @Column(name = "ANIMAL_NAME")
     private String name;
 
-    @Column(name = "DATE_OF_BIRTH")
+    @Column(name = "DATE_OF_BIRTH", nullable = false)
     private Date dateOfBirth;
 
     @ManyToOne

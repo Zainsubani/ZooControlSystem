@@ -19,8 +19,7 @@ import java.util.List;
         urlPatterns = "/getanimals"
 )
 public class GetAnimalsServlet extends HttpServlet {
-
-   private GenericDAOImpl<Animal> animalDAO;
+    private GenericDAOImpl<Animal> animalDAO = DBResourceManager.getAnimalDAO();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -35,10 +34,5 @@ public class GetAnimalsServlet extends HttpServlet {
         }
         writer.write("] }");
         writer.flush();
-    }
-
-    public void init(ServletConfig config) throws ServletException {
-         super.init();
-         animalDAO = DBResourceManager.getAnimalDAO();
     }
 }

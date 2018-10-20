@@ -11,7 +11,7 @@ public class MyServletContextListener implements ServletContextListener{
 
     public void contextInitialized(ServletContextEvent arg0) {
         GenericDAOImpl<ZooControlSystemUser> dao = DBResourceManager.getUsersDAO();
-        ZooControlSystemUser user = new ZooControlSystemUser("admin","admin");
+        ZooControlSystemUser user = new ZooControlSystemUser("admin", "admin", true);
         dao.save(user);
     }
 }
